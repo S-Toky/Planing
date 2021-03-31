@@ -31,8 +31,15 @@
 
 
   <div>
-    <% if @boards.present? %>
+    <% if @board.present? %>
       <h1> <%= @board.name%> </h1>
+      <% @board.projects.each do |project|%>
+          <%= project.name%> <br>
+          <%= project.description%> <br><br><br>
+      <%end%>
+      <div>
+        <%= render "projects/form", project: Project.new, board: @board%>
+      </div>
     <% end %>
   </div>
 
