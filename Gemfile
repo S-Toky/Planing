@@ -59,3 +59,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'table_print'
 gem 'jquery-rails'
+gem 'nested_scaffold'
+gem 'binding_of_caller'

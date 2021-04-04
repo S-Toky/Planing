@@ -8,6 +8,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1 or /projects/1.json
   def show
+    @task = @project.tasks.build
   end
 
   # GET /projects/new
@@ -23,6 +24,8 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @project.user = current_user
+    @project.board = Board.find_by(params[:board_id])
+    
 
     respond_to do |format|
       if @project.save
@@ -52,7 +55,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: "Project was successfully destroyed." }
+      format.html { redirect_to request.referrer, notice: "Project was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -65,6 +68,6 @@ class ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:name, :description, :board_id, :user_id)
+      params.require(:project).permit(:name, :description, :board_id)
     end
 end

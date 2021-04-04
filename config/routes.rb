@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
-  resources :projects
+  root to: "boards#index"
   devise_for :users
   resources :boards
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root to: "boards#index"
+
+  resources :projects do
+    resources :tasks
+  end
+  #namespace :project do
+    #resources :tasks
+  #end
 end

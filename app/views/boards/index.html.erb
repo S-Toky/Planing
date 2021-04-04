@@ -33,14 +33,42 @@
   <div>
     <% if @board.present? %>
       <h1> <%= @board.name%> </h1>
-      <% @board.projects.each do |project|%>
-          <%= project.name%> <br>
-          <%= project.description%> <br><br><br>
-      <%end%>
+
+        <h1>Projects</h1>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Board</th>
+              <th>User</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @board.projects.each do |project| %>
+              <tr>
+                <td><%= project.name %></td>
+                <td><%= project.description %></td>
+                <td><%= project.board_id %></td>
+                <td><%= project.user_id %></td>
+                <td><%= link_to 'Show', project %></td>
+                <td><%= link_to 'Edit', edit_project_path(project) %></td>
+                <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <br>
+
+        <%= link_to 'New Project', new_project_path %>
       <div>
         <%= render "projects/form", project: Project.new, board: @board%>
       </div>
-    <% end %>
+    <%end%>
   </div>
 
 
