@@ -1,0 +1,39 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%#= render 'form', board: Board.new %>
+        <%= form_with(model: board) do |form| %>
+          <% if board.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(board.errors.count, "error") %> prohibited this board from being saved:</h2>
+
+              <ul>
+                <% board.errors.each do |error| %>
+                  <li><%= error.full_message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="field">
+            <%= form.label :name %>
+            <%= form.text_field :name %>
+          </div>  
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" data-disable-with="Create Board" value="create board">
+              valider
+            </button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

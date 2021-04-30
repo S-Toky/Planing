@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <p>
   <strong>Name:</strong>
@@ -17,13 +16,11 @@
 
 <p>
   <strong>User:</strong>
-  <%= @project.user_id %>
+  <%= @project.user.email %>
 </p>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
-
-<hr>
+<%= link_to 'all project', projects_path %>
 
 <h1>Listing tasks</h1>
 
@@ -43,8 +40,8 @@
     <tr>
       <td><%= task.name %></td>
       <td><%= task.description %></td>
-      <td><%= task.status %></td>
-      <td><%= task.project %></td>
+      <td class="badge bg-<%= task.badge_color %>"><%= task.status %></td>
+      <td><%= task.project.name %></td>
       <td><%= link_to 'Show', [task.project, task] %></td>
       <td><%= link_to 'Edit', edit_project_task_path(task.project, task) %></td>
       <td><%= link_to 'Destroy', [task.project, task], method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -54,5 +51,6 @@
 </table>
 
 <br />
+<%= render 'tasks/create_modal' %>
 
-<%= link_to 'New Task', new_project_task_path(@project.id) %>
+<%# <%= link_to 'New Task', new_project_task_path(@project.id) %>

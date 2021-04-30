@@ -1,9 +1,10 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_project, only: %i[ show edit update destroy ]
 
   # GET /projects or /projects.json
   def index
-    @projects = Project.all
+    @projects = current_user.projects
   end
 
   # GET /projects/1 or /projects/1.json
@@ -18,13 +19,14 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    @board = @project.board_id
   end
 
   # POST /projects or /projects.json
   def create
     @project = Project.new(project_params)
     @project.user = current_user
-    @project.board = Board.find_by(params[:board_id])
+    # @project.board = Board.find(params[:board_id])
     
 
     respond_to do |format|
@@ -42,7 +44,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to @project, notice: "Project was successfully updated." }
+        format.html { redirect_to board_path(@project.board_id), notice: "Project was successfully updated." }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit, status: :unprocessable_entity }
