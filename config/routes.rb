@@ -1,3 +1,12 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root to: 'homes#index'
+  devise_for :users
+  resources :boards
+
+  resources :projects do
+    resources :tasks
+  end
+  #namespace :project do
+    #resources :tasks
+  #end
 end

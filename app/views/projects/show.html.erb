@@ -1,0 +1,56 @@
+
+<p>
+  <strong>Name:</strong>
+  <%= @project.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @project.description %>
+</p>
+
+<p>
+  <strong>Board:</strong>
+  <%= @project.board_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @project.user.email %>
+</p>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'all project', projects_path %>
+
+<h1>Listing tasks</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Status</th>
+    <th>Project</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @project.tasks.each do |task| %>
+  <% if task.persisted? %>
+    <tr>
+      <td><%= task.name %></td>
+      <td><%= task.description %></td>
+      <td class="badge bg-<%= task.badge_color %>"><%= task.status %></td>
+      <td><%= task.project.name %></td>
+      <td><%= link_to 'Show', [task.project, task] %></td>
+      <td><%= link_to 'Edit', edit_project_task_path(task.project, task) %></td>
+      <td><%= link_to 'Destroy', [task.project, task], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+<% end %>
+</table>
+
+<br />
+<%= render 'tasks/create_modal' %>
+
+<%# <%= link_to 'New Task', new_project_task_path(@project.id) %>
