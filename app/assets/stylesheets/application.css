@@ -15,24 +15,3 @@
  *= require assets/css/bootstrap.min
  */
 
-
-.alert{
-  display: contents;
-}
-
-#logo{
-  float: left;
-  width: 40px;
-  height: 40px;
-  background-color: blue;
-  border-radius: 50%;
-}
-
-.nav-item a{
-  color: black;
-}
-
-.nav-item a:hover, .nav-item a.selected{
-  color: rgb(17, 0, 250);
-}
-
