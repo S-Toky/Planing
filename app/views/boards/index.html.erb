@@ -70,8 +70,8 @@
                     </tr>
                   <% end %>
                     <div class="card card-body">
-                          <%= render "projects/form", project: Project.new, board: @board%>
-                        </div>
+                      <%= render "/projects/form", project: Project.new, board: board_id%>
+                    </div>
                 </tbody>
               </table>
               <br>
