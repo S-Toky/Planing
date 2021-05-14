@@ -51,31 +51,34 @@
 							</span>
 							<h4 class="text-section">Boards list</h4>
 						</li>
-						<% @boards.each do |board| %>
-							<li class="nav-item">
-								<a data-toggle="collapse" href="#<%= board.id%>">
-									<i class="fas fa-layer-group"></i>
-									<p>
-										<%= board.name %>
-									</p>
-									<span class="caret"></span>
-								</a>
-								<div class="collapse" id="<%= board.id%>">
-									<ul class="nav nav-collapse">
-									
-									<% if board.projects.empty? %>
-										<li>
-											<button class="btn btn-secondary btn-xs">Extra Small</button>
-										</li>
-									<% end %>
-									<% board.projects.order(created_at: :desc).each do |project| %>
-										<li>
-											<a class="nav-link" id="v-pills-<%= project.id%>-tab" data-toggle="pill" href="#v-pills-<%= project.id%>" role="tab" aria-controls="v-pills-<%= project.id%>" aria-selected="false"><span class="sub-item"><%= project.name%></span></a>
-										</li>
+						
+						<% if user_signed_in? %>
+							<% @boards.each do |board| %>
+								<li class="nav-item">
+									<a data-toggle="collapse" href="#<%= board.id%>">
+										<i class="fas fa-layer-group"></i>
+										<p>
+											<%= board.name %>
+										</p>
+										<span class="caret"></span>
+									</a>
+									<div class="collapse" id="<%= board.id%>">
+										<ul class="nav nav-collapse">
+										
+										<% if board.projects.empty? %>
+											<li>
+												<button class="btn btn-secondary btn-xs">Extra Small</button>
+											</li>
 										<% end %>
-									</ul>
-								</div>
-							</li>
+										<% board.projects.order(created_at: :desc).each do |project| %>
+											<li>
+												<a class="nav-link" id="v-pills-<%= project.id%>-tab" data-toggle="pill" href="#v-pills-<%= project.id%>" role="tab" aria-controls="v-pills-<%= project.id%>" aria-selected="false"><span class="sub-item"><%= project.name%></span></a>
+											</li>
+											<% end %>
+										</ul>
+									</div>
+								</li>
+							<% end %>
 						<% end %>
 					</ul>
 				</div>
@@ -87,9 +90,13 @@
 
 <!-- Modal -->
 <%# new board %>
-<% @boards.each do |board| %>
-	<%= render '/boards/create_modal', board: Board.new %>
+
+<% if user_signed_in? %>
+	<% @boards.each do |board| %>
+		<%= render '/boards/create_modal', board: Board.new %>
+	<% end %>
 <% end %>
+
 
 
 
