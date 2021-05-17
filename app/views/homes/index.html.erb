@@ -1,105 +1,98 @@
 
 	<!-- Sidebar -->
-		<div class="sidebar sidebar-style-2" data-background-color="dark2">
-			<div class="sidebar-wrapper scrollbar scrollbar-inner">
-				<div class="sidebar-content">
-					<div class="user">
-						<div class="avatar-sm float-left mr-2">
-							<img src="planing/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
-						</div>
-						<div class="info">
-							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
-								<span>
-									Hizrian
-									<span class="user-level">Administrator</span>
-									<span class="caret"></span>
-								</span>
-							</a>
-							<div class="clearfix"></div>
+<div class="sidebar sidebar-style-2" data-background-color="dark2">
+	<div class="sidebar-wrapper scrollbar scrollbar-inner">
+		<div class="sidebar-content">
+			<div class="user">
+				<div class="avatar-sm float-left mr-2">
+					<img src="planing/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+				</div>
+				<div class="info">
+					<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+						<span>
+							Hizrian
+							<span class="user-level">Administrator</span>
+							<span class="caret"></span>
+						</span>
+					</a>
+					<div class="clearfix"></div>
 
-							<div class="collapse in" id="collapseExample">
-								<ul class="nav">
-									<li>
-										<a href="#profile">
-											<span class="link-collapse">My Profile</span>
-										</a>
-									</li>
-									<li>
-										<a href="#edit">
-											<span class="link-collapse">Edit Profile</span>
-										</a>
-									</li>
-									<li>
-										<a href="#settings">
-											<span class="link-collapse">Settings</span>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
+					<div class="collapse in" id="collapseExample">
+						<ul class="nav">
+							<li>
+								<a href="#profile">
+									<span class="link-collapse">My Profile</span>
+								</a>
+							</li>
+							<li>
+								<a href="#edit">
+									<span class="link-collapse">Edit Profile</span>
+								</a>
+							</li>
+							<li>
+								<a href="#settings">
+									<span class="link-collapse">Settings</span>
+								</a>
+							</li>
+						</ul>
 					</div>
-					<ul class="nav nav-primary">
-						<li class="nav-item active">
-							<a data-toggle="modal" data-target="#modalBoardCreate" class="collapsed" aria-expanded="false" type="button">
-								<i class="fas fa-table"></i>
-								<p>New board</p>
-							</a>
-						</li>
-						<li class="nav-section">
-							<span class="sidebar-mini-icon">
-								<i class="fa fa-ellipsis-h"></i>
-							</span>
-							<h4 class="text-section">Boards list</h4>
-						</li>
-						
-						<% if user_signed_in? %>
-							<% @boards.each do |board| %>
-								<li class="nav-item">
-									<a data-toggle="collapse" href="#<%= board.id%>">
-										<i class="fas fa-layer-group"></i>
-										<p>
-											<%= board.name %>
-										</p>
-										<span class="caret"></span>
-									</a>
-									<div class="collapse" id="<%= board.id%>">
-										<ul class="nav nav-collapse">
-										
-										<% if board.projects.empty? %>
-											<li>
-												<button class="btn btn-secondary btn-xs">Extra Small</button>
-											</li>
-										<% end %>
-										<% board.projects.order(created_at: :desc).each do |project| %>
-											<li>
-												<a class="nav-link" id="v-pills-<%= project.id%>-tab" data-toggle="pill" href="#v-pills-<%= project.id%>" role="tab" aria-controls="v-pills-<%= project.id%>" aria-selected="false"><span class="sub-item"><%= project.name%></span></a>
-											</li>
-											<% end %>
-										</ul>
-									</div>
-								</li>
-							<% end %>
-						<% end %>
-					</ul>
 				</div>
 			</div>
+			<ul class="nav nav-primary">
+				<li class="nav-item active">
+					<a data-toggle="modal" data-target="#modalBoardCreate" class="collapsed" aria-expanded="false" type="button">
+						<i class="fas fa-table"></i>
+						<p>New board</p>
+					</a>
+				</li>
+				<li class="nav-section">
+					<span class="sidebar-mini-icon">
+						<i class="fa fa-ellipsis-h"></i>
+					</span>
+					<h4 class="text-section">Boards list</h4>
+				</li>
+				
+				<% if user_signed_in? %>
+					<% @boards.each do |board| %>
+						<li class="nav-item">
+							<a data-toggle="collapse" href="#<%= board.id%>">
+								<i class="fas fa-layer-group"></i>
+								<p>
+									<%= board.name %>
+								</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="<%= board.id%>">
+								<ul class="nav nav-collapse">
+								
+								<% if board.projects.empty? %>
+									<li>
+										<button class="btn btn-secondary btn-xs">Extra Small</button>
+									</li>
+								<% end %>
+								<% board.projects.order(created_at: :desc).each do |project| %>
+									<li>
+										<a class="nav-link" id="v-pills-<%= project.id%>-tab" data-toggle="pill" href="#v-pills-<%= project.id%>" role="tab" aria-controls="v-pills-<%= project.id%>" aria-selected="false"><span class="sub-item"><%= project.name%></span></a>
+									</li>
+									<% end %>
+								</ul>
+							</div>
+						</li>
+					<% end %>
+				<% end %>
+			</ul>
 		</div>
+	</div>
+</div>
 		<!-- End Sidebar -->
-
-
 
 <!-- Modal -->
 <%# new board %>
-
 <% if user_signed_in? %>
 	<% @boards.each do |board| %>
 		<%= render '/boards/create_modal', board: Board.new %>
 	<% end %>
 <% end %>
-
-
-
-
 
 <div class="main-panel">
 	<div class="content" style="min-height: auto;">
@@ -696,7 +689,6 @@
 
 <!-- Modal -->
 <%# new project %>
-
 <% @projects.each do |project| %>
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModal<%= project.id %>" tabindex="-1" aria-labelledby="exampleModal<%= project.id %>Label" aria-hidden="true">
