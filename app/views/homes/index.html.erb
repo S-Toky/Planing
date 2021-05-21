@@ -66,6 +66,7 @@
 								<ul class="nav nav-collapse">
 								
 								<% if board.projects.empty? %>
+								<%= render "/projects/form", project: Project.new, board: board%>
 									<li>
 										<button class="btn btn-secondary btn-xs">Extra Small</button>
 									</li>
@@ -89,10 +90,9 @@
 <!-- Modal -->
 <%# new board %>
 <% if user_signed_in? %>
-	<% @boards.each do |board| %>
 		<%= render '/boards/create_modal', board: Board.new %>
-	<% end %>
 <% end %>
+
 
 <div class="main-panel">
 	<div class="content" style="min-height: auto;">
@@ -241,6 +241,10 @@
 													<div class="card-title">Daily Sales</div>
 													<div class="card-category">March 25 - April 02</div>
 												</div>
+
+<div id="pieChart"></div>
+
+
 												<div class="card-body pb-0">
 													<div class="mb-4 mt-2">
 														<h1>$4,578.58</h1>
@@ -705,3 +709,10 @@
 		</div>
 	</div>
 <% end %>
+
+<script>
+$('#pieChart').sparkline([20,50,30], {
+type: 'pie',
+height: '100',
+});
+</script>
